@@ -1,5 +1,5 @@
 import { Search, SearchX, SlidersHorizontal } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import EventGrid from '../components/events/EventGrid'
 import Button from '../components/ui/Button'
@@ -10,7 +10,7 @@ import { events } from '../data/events'
 export default function DiscoverEvents() {
   const [searchParams, setSearchParams] = useSearchParams()
   const query = searchParams.get('q') || ''
-  const [activeCategory, setActiveCategory] = useState('All')
+  const activeCategory = searchParams.get('category') || 'All'
 
   const filteredEvents = useMemo(() => {
     const term = query.trim().toLowerCase()
@@ -33,11 +33,20 @@ export default function DiscoverEvents() {
   }, [query, activeCategory])
 
   function handleQueryChange(value) {
-    setSearchParams(value.trim() ? { q: value } : {}, { replace: true })
+    const next = new URLSearchParams(searchParams)
+    if (value.trim()) next.set('q', value)
+    else next.delete('q')
+    setSearchParams(next, { replace: true })
+  }
+
+  function handleCategoryChange(category) {
+    const next = new URLSearchParams(searchParams)
+    if (category === 'All') next.delete('category')
+    else next.set('category', category)
+    setSearchParams(next, { replace: true })
   }
 
   function clearFilters() {
-    setActiveCategory('All')
     setSearchParams({}, { replace: true })
   }
 
@@ -78,7 +87,7 @@ export default function DiscoverEvents() {
                 key={category}
                 type="button"
                 className={`filter-chip ${activeCategory === category ? 'is-active' : ''}`}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryChange(category)}
                 aria-pressed={activeCategory === category}
               >
                 {category}

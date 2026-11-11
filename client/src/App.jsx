@@ -2,7 +2,11 @@ import { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
 import DiscoverEvents from './pages/DiscoverEvents'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
 import MyEvents from './pages/MyEvents'
+import Profile from './pages/Profile'
+import Signup from './pages/Signup'
 import StudentHome from './pages/StudentHome'
 
 function ScrollToTop() {
@@ -19,14 +23,37 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<StudentHome />} />
-          <Route path="/events" element={<DiscoverEvents />} />
-          <Route path="/my-events" element={<MyEvents />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </AppLayout>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AppLayout>
+              <StudentHome />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <AppLayout>
+              <DiscoverEvents />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/my-events"
+          element={
+            <AppLayout>
+              <MyEvents />
+            </AppLayout>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </>
   )
 }
