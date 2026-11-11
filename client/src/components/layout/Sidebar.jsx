@@ -13,7 +13,7 @@ import Avatar from '../ui/Avatar'
 import Brand from '../ui/Brand'
 
 const navItems = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/events', label: 'Discover Events', icon: Compass },
   { to: '/my-events', label: 'My Events', icon: Ticket, count: student.registeredCount },
 ]

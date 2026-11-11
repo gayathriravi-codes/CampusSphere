@@ -6,7 +6,7 @@ import Avatar from '../ui/Avatar'
 import Brand from '../ui/Brand'
 
 const pageTitles = {
-  '/': 'Dashboard',
+  '/dashboard': 'Dashboard',
   '/events': 'Discover Events',
   '/my-events': 'My Events',
 }

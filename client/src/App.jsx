@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
 import DiscoverEvents from './pages/DiscoverEvents'
+import Landing from './pages/Landing'
 import MyEvents from './pages/MyEvents'
 import StudentHome from './pages/StudentHome'
 
@@ -19,14 +20,34 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<StudentHome />} />
-          <Route path="/events" element={<DiscoverEvents />} />
-          <Route path="/my-events" element={<MyEvents />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </AppLayout>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AppLayout>
+              <StudentHome />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <AppLayout>
+              <DiscoverEvents />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/my-events"
+          element={
+            <AppLayout>
+              <MyEvents />
+            </AppLayout>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </>
   )
 }
