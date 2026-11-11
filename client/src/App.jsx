@@ -3,7 +3,10 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
 import DiscoverEvents from './pages/DiscoverEvents'
 import Landing from './pages/Landing'
+import Login from './pages/Login'
 import MyEvents from './pages/MyEvents'
+import Profile from './pages/Profile'
+import Signup from './pages/Signup'
 import StudentHome from './pages/StudentHome'
 
 function ScrollToTop() {
@@ -22,6 +25,9 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="/dashboard"
           element={
